@@ -1,0 +1,61 @@
+#include<stdio.h>
+#include<cstdlib>
+#define MAX_VERTEX 30
+
+typedef int Element;
+typedef struct ArrayGraph {
+	int N;
+	Element adjMAtrix[MAX_VERTEX][MAX_VERTEX];
+}Graph;
+
+Graph* createGraph() {
+	int i, j;
+	Graph* G = (Graph*)malloc(sizeof(Graph));
+	G->N = 0;
+	for (i = 0; i < MAX_VERTEX; i++)
+		for (j = 0; j < MAX_VERTEX; j++)
+			G->adjMAtrix[i][j] = 0;
+	return G;
+}
+
+void insertVertex(Graph* G, Element v) {
+	if ((G->N + 1) > MAX_VERTEX) { return; }
+	(G->N)++;
+}
+
+void isertEdge(Graph* G, Element u, Element v) {
+	if (u >= G->N || v >= G->N) { return; }
+	G->adjMAtrix[u][v] = 1;
+}
+
+void printGraph(Graph* G) {
+	int i, j;
+	printf("Graph insertance...");
+	for (i = 0; i < G->N; i++) {
+		printf("\n");
+		for (j = 0; j < G->N; j++)
+			printf("%d", G->adjMAtrix[i][j]);
+	}
+	printf("\n");
+}
+
+int main() {
+	int i;
+	Graph*G1;
+	G1 = createGraph();
+	for (i = 0; i < 4; i++)
+		insertVertex(G1, i);
+	isertEdge(G1, 0, 1);
+	isertEdge(G1, 0, 3);
+	isertEdge(G1, 1, 0);
+	isertEdge(G1, 1, 2);
+	isertEdge(G1, 1, 3);
+	isertEdge(G1, 2, 1);
+	isertEdge(G1, 2, 3);
+	isertEdge(G1, 3, 0);
+	isertEdge(G1, 3, 1);
+	isertEdge(G1, 3, 2);
+	printGraph(G1);
+	getchar();
+	return 0;
+}
